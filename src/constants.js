@@ -1,5 +1,5 @@
 export const COLUMNS = [
-  { id: 'pendiente', title: 'Pendiente' },
+  { id: 'pendiente', title: 'Pendientes' },
   { id: 'progreso', title: 'En progreso' },
   { id: 'completado', title: 'Completado' },
 ]
