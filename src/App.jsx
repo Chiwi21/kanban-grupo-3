@@ -104,6 +104,9 @@ function App() {
   const handleMove = (id, status) => {
     setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, status } : task)))
   }
+    const clearCompleted = () => {
+    setTasks((prev) => prev.filter((task) => task.status !== 'completado'))
+  }
 
   return (
     <div className="app">
@@ -141,6 +144,15 @@ function App() {
               onChange={(event) => setQuery(event.target.value)}
             />
           </label>
+
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={clearCompleted}
+            disabled={completedCount === 0}
+          >
+            Limpiar completadas ({completedCount})
+          </button>
 
           <button type="button" className="btn btn-primary" onClick={() => openCreate('pendiente')}>
             <svg
