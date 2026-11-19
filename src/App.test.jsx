@@ -136,4 +136,16 @@ describe('Tablero Kanban', () => {
     expect(screen.getByText('Publicar en Vercel')).toBeInTheDocument()
     expect(screen.queryByText('Documentar el pipeline')).not.toBeInTheDocument()
   })
+    it('limpia todas las tareas completadas', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await createTask(user, { title: 'Tarea completada', status: 'completado' })
+    await createTask(user, { title: 'Tarea pendiente' })
+
+    await user.click(screen.getByRole('button', { name: /limpiar completadas/i }))
+
+    expect(screen.queryByText('Tarea completada')).not.toBeInTheDocument()
+    expect(screen.getByText('Tarea pendiente')).toBeInTheDocument()
+  })
 })
